@@ -6273,8 +6273,7 @@ textarea.form-control-lg {
   margin-left: 0.5rem !important; }
 
 .mx-3 {
-  margin-right: 1rem !important;
-  margin-left: 1rem !important; }
+  margin-right: 1rem !important; }
 
 .mx-4 {
   margin-right: 1.5rem !important;
@@ -17536,20 +17535,20 @@ pre[class*="language-"] {
 /*# sourceMappingURL=material-dashboard.css.map */
 
 #numerosPago{
-  display: inline;
+  display: flex;
 }
 
  .boleto-cuadro{
-  display: table-cell;
+   display: flex;
   width: 100px;
   height: 100px;
-  text-align: center;
-  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
   font-size: 26px;
   font-style: bold;
-  margin-right: 25px;
   border-style: solid;
-  border-color: #741FFF;
+  border-color: #D81B60;
   border-width: 3px;
   border-radius: 10px;
   background: white;
@@ -17558,4 +17557,14 @@ pre[class*="language-"] {
 .checkboxes{
   color: #000;
   display: block;
+}
+h5 {
+  margin-top: 20px;
+}
+div.checkboxes{
+  margin-top: 20px;
+}
+form {
+  margin-top: 30px;
+  margin-bottom: 5px;
 }

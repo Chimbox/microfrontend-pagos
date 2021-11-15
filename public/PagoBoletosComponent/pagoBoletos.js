@@ -12,23 +12,21 @@ class PagoBoletos extends HTMLElement {
     #render(shadow) {
         shadow.innerHTML += `
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-    <div class="card my-4">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-            <h3 class="text-black text-capitalize ps-3">Paga tus Boletos</h6>
-        </div>
-        <div>
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">PAGA TUS BOLETOS</h6>
+                    </div>
+                </div>
+            <div>
             <h5>Tus números a pagar:</h5>
             <div id="numerosPago">
             </div>
-            
             <div class="checkboxes">
                 <input type="checkbox" name="cbxBoletosCorrectos" id="cbxBoletosCorrectos" value="">
                 <label for="cbxBoletosCorrectos">He verificado que estos boletos son los que pagaré.</label>
             </div>
-
             <form>
-
-
                 <!-- Identify your business so that you can collect the payments. -->
 
                 <input type="hidden" name="business" value="">
