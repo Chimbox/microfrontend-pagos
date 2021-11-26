@@ -37,7 +37,8 @@ class BoletosApartados extends HTMLElement {
                         </tbody>
                     </table>
                 </div>
-                <input id="btnPagar" type="submit" value="Pagar">
+                <input id="btnPagar" class="btn bg-gradient-primary mb-0" type="submit" value="Pagar">
+                <input id="btnCargarComprobante" class="btn bg-gradient-primary mb-0" type="submit" value="Cargar Comprobante">
             </div>
         </div>
     </div>
@@ -70,13 +71,7 @@ class BoletosApartados extends HTMLElement {
             });
 
         shadow.querySelector("#btnPagar").onclick = () => {
-            let pagando = new Array();
-            shadow.querySelectorAll("input[type=checkbox]:checked").forEach(element => {
-                let boleto=new Object();
-                boleto.id=element.id;
-                boleto.numero=element.value;
-                pagando.push(boleto);
-            });
+            let pagando = this.#getBoletosSeleccionados(shadow);
 
             if (pagando.length > 0) {
                 sessionStorage.setItem('pagando', JSON.stringify(pagando));
@@ -85,6 +80,28 @@ class BoletosApartados extends HTMLElement {
                 alert('Primero debe seleccionar al menos 1 boleto a pagar.');
             }
         }
+
+        shadow.querySelector("#btnCargarComprobante").onclick = () => {
+            let pagando = this.#getBoletosSeleccionados(shadow);
+
+            if (pagando.length > 0) {
+                sessionStorage.setItem('comprobantes', JSON.stringify(pagando));
+                window.location = "./upload.html";
+            } else {
+                alert('Primero debe seleccionar al menos 1 boleto a pagar.');
+            }
+        }
+    }
+
+    #getBoletosSeleccionados(shadow){
+        let pagando = new Array();
+            shadow.querySelectorAll("input[type=checkbox]:checked").forEach(element => {
+                let boleto=new Object();
+                boleto.id=element.id;
+                boleto.numero=element.value;
+                pagando.push(boleto);
+            });
+        return pagando;
     }
 }
 window.customElements.define('boletos-apartados', BoletosApartados);
