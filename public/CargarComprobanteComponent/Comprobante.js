@@ -58,6 +58,9 @@ class Comprobante extends HTMLElement {
     let cantidadArchivos = 0;
     const boton = shadow.querySelector("#btnEnviarComprobante");
 
+    let comprobante = JSON.parse(sessionStorage.getItem("comprobantes"));
+   
+
     boton.onclick = () => {
       if (cantidadArchivos == 0) {
         alert("Seleccione el comprobante que desea subir");
@@ -73,8 +76,22 @@ class Comprobante extends HTMLElement {
             //sessionStorage.setItem("subidos", JSON.stringify(comprobantes));
             //window.location = "./index.html";
             //});
-            alert('Aquí se enviará el archivo al servidor y se guardará la ruta en bd para cada boleto.');
-            window.location = "./index.html";
+            const formData = new FormData();
+            formData.append('boletos', JSON.stringify(comprobante));
+            formData.append('file', fileInput.files[0]);
+
+            fetch('http://localhost:3001/servicioNumPagos/boletos/comprobantes',{
+              method: 'PUT',
+              body: formData
+            })
+            .then(res => {
+              window.location = "./index.html";
+            })
+            .catch(err => {
+              console.log(err.message);
+
+            });
+
             return;
         }
       }

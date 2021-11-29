@@ -64,7 +64,7 @@ class BoletosApartados extends HTMLElement {
                     tabla.innerHTML += `<tr>
         <td>Boleto `+boleto.numero+`</td>
         <td>
-        <input type="checkbox" name="" id="`+boleto.id+`" value="`+boleto.numero+`">
+        <input type="checkbox" name="" id="`+boleto._id+`" value="`+boleto.numero+`">
         </td>
     </tr>`;
                 });
