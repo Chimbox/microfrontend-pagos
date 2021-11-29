@@ -1,5 +1,5 @@
 class BoletosApartados extends HTMLElement {
-    #urlGateway = "http://127.0.0.1:3001/servicioNumPagos/";
+    #urlGateway = "http://localhost:3002/res/";
     #urlBoletos = this.#urlGateway + "boletos";
 
     constructor() {

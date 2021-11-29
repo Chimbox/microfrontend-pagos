@@ -80,7 +80,7 @@ class Comprobante extends HTMLElement {
             formData.append('boletos', JSON.stringify(comprobante));
             formData.append('file', fileInput.files[0]);
 
-            fetch('http://localhost:3001/servicioNumPagos/boletos/comprobantes',{
+            fetch('http://localhost:3002/res/boletos/comprobantes',{
               method: 'PUT',
               body: formData
             })
