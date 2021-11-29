@@ -61,13 +61,32 @@ class BoletosApartados extends HTMLElement {
         })
             .then((boletos) => {
                 boletos.forEach(boleto => {
-                    tabla.innerHTML += `<tr>
-        <td>Boleto `+boleto.numero+`</td>
-        <td>
-        <input type="checkbox" name="" id="`+boleto._id+`" value="`+boleto.numero+`">
-        </td>
-    </tr>`;
+
+                    if(boleto.comprobantePago != ""){
+                        tabla.innerHTML += `<tr> 
+                            <td>Boleto `+boleto.numero+`</td>
+                            <td>
+                                <input type="checkbox" id="`+boleto._id+`" disabled value="`+boleto.numero+`">    
+                            </td>
+                            <td>
+                                <button id="`+boleto._id+`" class="btnEliminar" value="`+boleto.numero+`">Eliminar Comprobante</button>
+                            </td>
+                        </tr>`;
+                    }else{
+                        tabla.innerHTML += `<tr> 
+                            <td>Boleto `+boleto.numero+`</td>
+                            <td>
+                                <input type="checkbox" id="`+boleto._id+`" value="`+boleto.numero+`">    
+                            </td>
+                            <td>
+                                <button id="`+boleto._id+`" disabled lass="btnEliminar">Eliminar Comprobante</button>
+                            </td>
+                        </tr>`;
+                    }
+                    this.#eliminarComprobante(shadow)
                 });
+
+               
             });
 
         shadow.querySelector("#btnPagar").onclick = () => {
@@ -102,6 +121,43 @@ class BoletosApartados extends HTMLElement {
                 pagando.push(boleto);
             });
         return pagando;
+    }
+
+    #eliminarComprobante(shadow){
+        let botones = shadow.querySelectorAll(".btnEliminar")
+        console.log(botones)
+        botones.forEach((boton) =>{
+            boton.onclick = () =>{
+                let boletos = new Array();
+                let boleto=new Object();
+                boleto.id=boton.id;
+                boleto.numero=boton.value;
+                boletos.push(boleto)
+
+                var opcion = confirm("¿Esta seguro que desea eliminar este comprobante?");
+                if (opcion == true) {
+                    const formData = new FormData();
+                    formData.append('boleto', JSON.stringify(boletos));
+                    alert(JSON.stringify(boletos))
+                    formData.append('file', "");
+
+                    fetch('http://localhost:3001/servicioNumPagos/boletos/comprobantesEliminar',{
+                    method: 'PUT',
+                    body: formData
+                    })
+                    .then(res => {
+                    window.location = "./index.html";
+                    })
+                    .catch(err => {
+                    console.log(err.message);
+
+                    });
+
+                    return
+                } 
+            }
+        })
+
     }
 }
 window.customElements.define('boletos-apartados', BoletosApartados);

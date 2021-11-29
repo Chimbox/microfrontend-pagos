@@ -71,11 +71,6 @@ class Comprobante extends HTMLElement {
         if(!allowedExtensions.exec(filePath)){
             alert('Verifique que su archivo termine con .jpeg/.jpg/.png/.pdf');
         }else{
-            //shadow.querySelectorAll("li").forEach((comprobante) => {
-            //comprobantes.push($(comprobante).text());
-            //sessionStorage.setItem("subidos", JSON.stringify(comprobantes));
-            //window.location = "./index.html";
-            //});
             const formData = new FormData();
             formData.append('boletos', JSON.stringify(comprobante));
             formData.append('file', fileInput.files[0]);
