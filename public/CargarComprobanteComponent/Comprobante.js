@@ -22,7 +22,7 @@ class Comprobante extends HTMLElement {
                 
         <div class="container-fluid py-4">
         <form action="./index.html" method="post" enctype="multipart/form-data" target="_blank">
-        <input id="comprobantes-archivos" class="btn bg-gradient-primary mb-0" type="file" name="archivossubidos[]" multiple="multiple"
+        <input id="comprobantes-archivos" class="btn bg-gradient-primary mb-0" type="file" name="archivossubidos[]"
             accept=".png, .jpeg, .jpg, .pdf"> 
         </input>
                 <!-- Cambiar la referencia al subir el archivo -->

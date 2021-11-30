@@ -138,7 +138,6 @@ class BoletosApartados extends HTMLElement {
                 if (opcion == true) {
                     const formData = new FormData();
                     formData.append('boleto', JSON.stringify(boletos));
-                    alert(JSON.stringify(boletos))
                     formData.append('file', "");
 
                     fetch('http://localhost:3001/servicioNumPagos/boletos/comprobantesEliminar',{
