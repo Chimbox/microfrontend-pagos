@@ -1,5 +1,5 @@
 class BoletosApartados extends HTMLElement {
-    #urlGateway = "http://localhost:3002/res/";
+    #urlGateway = "http://localhost:3006/servicioNumPagos/";
     #urlBoletos = this.#urlGateway + "boletos";
 
     constructor() {
@@ -11,6 +11,7 @@ class BoletosApartados extends HTMLElement {
         this.#render(shadow);
         this.#agregaEstilo(shadow);
         this.#cargaBoletosApartados(shadow, idCliente);
+        this.#eliminarComprobante(shadow);
     }
     #render(shadow) {
         shadow.innerHTML += `
@@ -79,7 +80,7 @@ class BoletosApartados extends HTMLElement {
                                 <input type="checkbox" id="`+boleto._id+`" value="`+boleto.numero+`">    
                             </td>
                             <td>
-                                <button id="`+boleto._id+`" disabled lass="btnEliminar">Eliminar Comprobante</button>
+                                <button id="`+boleto._id+`" disabled class="btnEliminar">Eliminar Comprobante</button>
                             </td>
                         </tr>`;
                     }
@@ -125,24 +126,16 @@ class BoletosApartados extends HTMLElement {
 
     #eliminarComprobante(shadow){
         let botones = shadow.querySelectorAll(".btnEliminar")
-        console.log(botones)
         botones.forEach((boton) =>{
             boton.onclick = () =>{
-                let boletos = new Array();
                 let boleto=new Object();
                 boleto.id=boton.id;
-                boleto.numero=boton.value;
-                boletos.push(boleto)
 
                 var opcion = confirm("¿Esta seguro que desea eliminar este comprobante?");
                 if (opcion == true) {
-                    const formData = new FormData();
-                    formData.append('boleto', JSON.stringify(boletos));
-                    formData.append('file', "");
 
-                    fetch('http://localhost:3001/servicioNumPagos/boletos/comprobantesEliminar',{
-                    method: 'PUT',
-                    body: formData
+                    fetch('http://localhost:3006/servicioNumPagos/boletos/comprobantes?idBoleto='+boleto.id,{
+                    method: 'DELETE'
                     })
                     .then(res => {
                     window.location = "./index.html";
